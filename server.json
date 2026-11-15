@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.rare-disease-atlas/orphan-disease-opportunity-mcp",
+  "title": "Orphan Disease Opportunity Atlas MCP",
+  "description": "Orphan disease startup blueprints, JAK2+ MF biology, non-dilutive grants, and validation MCP.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://rare-disease-atlas.github.io",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "orphan-disease-opportunity-mcp",
+      "version": "1.0.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "ATLAS_DATA_URL",
+          "description": "Optional override URL for live opportunities.json feed (defaults to https://rare-disease-atlas.github.io/opportunities.json).",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "ATLAS_OFFLINE",
+          "description": "Set to '1' to force deterministic offline execution using bundled opportunities.json.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

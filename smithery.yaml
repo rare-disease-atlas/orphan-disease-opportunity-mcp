@@ -1,0 +1,35 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      atlasDataUrl:
+        type: string
+        description: "Optional override URL for live opportunities.json feed (defaults to https://rare-disease-atlas.github.io/opportunities.json)."
+      atlasOffline:
+        type: boolean
+        default: false
+        description: "Set true to force deterministic offline execution using bundled data/opportunities.json."
+    required: []
+  commandFunction:
+    |-
+    (config) => {
+      const env = {};
+      if (config && config.atlasDataUrl) {
+        env.ATLAS_DATA_URL = String(config.atlasDataUrl);
+      }
+      if (config && config.atlasOffline) {
+        env.ATLAS_OFFLINE = "1";
+      }
+      return {
+        command: "orphan-disease-opportunity-mcp",
+        args: [],
+        env
+      };
+    }
+  exampleConfig:
+    atlasOffline: false
+build:
+  dockerfile: Dockerfile
+  dockerBuildPath: .
