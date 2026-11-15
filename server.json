@@ -3,7 +3,7 @@
   "name": "io.github.rare-disease-atlas/orphan-disease-opportunity-mcp",
   "title": "Orphan Disease Opportunity Atlas MCP",
   "description": "Orphan disease startup blueprints, JAK2+ & AIMF biology, non-dilutive grants, and validation MCP.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "repository": {
     "url": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp",
     "source": "github"
@@ -12,8 +12,8 @@
   "packages": [
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp/releases/download/v1.2.0/orphan-disease-opportunity-mcp.mcpb",
-      "fileSha256": "8e495955ad69a41f580e76ce56b749d59eaf34b964d1adc35c3460418c8c7b43",
+      "identifier": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp/releases/download/v1.3.0/orphan-disease-opportunity-mcp.mcpb",
+      "fileSha256": "43dcc62ed5a06655570fe3dc4bd4aca52d6fe3c17281281dc0ebd31b245b047b",
       "transport": {
         "type": "stdio"
       }

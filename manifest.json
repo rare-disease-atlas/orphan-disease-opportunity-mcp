@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "orphan-disease-opportunity-mcp",
   "display_name": "Orphan Disease Opportunity Atlas MCP",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Orphan disease startup blueprints, JAK2+ & autoimmune MF biology, non-dilutive grants, and validation MCP.",
   "long_description": "Zero-dependency Model Context Protocol (MCP) server for high-tractability orphan disease translational and venture blueprints (Flagships: Clonal JAK2 V617F+ Myelofibrosis and Autoimmune Myelofibrosis + Iron/Hepcidin Axis), FDA Orphan Drug economics, non-dilutive grants, and ethical patient-community validation.",
   "author": {
@@ -58,6 +58,10 @@
     {
       "name": "get_validation_communities",
       "description": "Retrieve patient registries, institutional research networks, and anti-spam ethical validation guidelines."
+    },
+    {
+      "name": "submit_atlas_feedback",
+      "description": "Submit opt-in non-PII feedback, missing founder wedges, or ClinicalTrials.gov citation errata."
     }
   ]
 }

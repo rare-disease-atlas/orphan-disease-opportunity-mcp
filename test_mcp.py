@@ -134,6 +134,7 @@ class OrphanDiseaseMCPTestSuite(unittest.TestCase):
                     "get_disease_case_study",
                     "find_non_dilutive_grants",
                     "get_validation_communities",
+                    "submit_atlas_feedback",
                 ],
             )
 
@@ -214,6 +215,29 @@ class OrphanDiseaseMCPTestSuite(unittest.TestCase):
                 len(val_data["institutional_and_patient_communities"]), 4
             )
             self.assertGreaterEqual(len(val_data["ethical_discovery_guidelines"]), 4)
+
+            # 8b. tools/call -> submit_atlas_feedback (offline PII-redaction + GitHub Issue URL test)
+            fb_resp = client.send_request(
+                {
+                    "jsonrpc": "2.0",
+                    "id": 77,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "submit_atlas_feedback",
+                        "arguments": {
+                            "signal_type": "missing-wedge",
+                            "founder_background": "computational-ai-bio",
+                            "disease_id": "autoimmune-myelofibrosis",
+                            "agent_client": "test-suite",
+                            "summary": "Add spatial proteomics bone marrow panel; contact test@example.org for paper.",
+                        },
+                    },
+                }
+            )
+            fb_data = json.loads(fb_resp["result"]["content"][0]["text"])
+            self.assertFalse(fb_data["webhook_delivered"])
+            self.assertIn("[redacted-email]", fb_data["sanitized_signal"]["summary"])
+            self.assertIn("labels=agent-signal", fb_data["prefilled_github_issue_url"])
 
             # 9. resources/list & resources/read
             res_list = client.send_request(
