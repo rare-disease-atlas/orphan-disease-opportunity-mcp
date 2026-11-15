@@ -408,7 +408,7 @@ class OrphanDiseaseMCPTestSuite(unittest.TestCase):
             reg["repository"]["url"],
             "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp",
         )
-        self.assertEqual(reg["packages"][0]["registryType"], "pypi")
+        self.assertIn(reg["packages"][0]["registryType"], ("mcpb", "pypi", "oci"))
 
         glama_path = MCP_DIR / "glama.json"
         with glama_path.open("r", encoding="utf-8") as fh:

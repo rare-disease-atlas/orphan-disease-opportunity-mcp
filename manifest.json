@@ -1,0 +1,63 @@
+{
+  "manifest_version": "0.3",
+  "name": "orphan-disease-opportunity-mcp",
+  "display_name": "Orphan Disease Opportunity Atlas MCP",
+  "version": "1.2.0",
+  "description": "Orphan disease startup blueprints, JAK2+ & autoimmune MF biology, non-dilutive grants, and validation MCP.",
+  "long_description": "Zero-dependency Model Context Protocol (MCP) server for high-tractability orphan disease translational and venture blueprints (Flagships: Clonal JAK2 V617F+ Myelofibrosis and Autoimmune Myelofibrosis + Iron/Hepcidin Axis), FDA Orphan Drug economics, non-dilutive grants, and ethical patient-community validation.",
+  "author": {
+    "name": "Rare Disease Venture Atlas",
+    "url": "https://rare-disease-atlas.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp.git"
+  },
+  "homepage": "https://rare-disease-atlas.github.io",
+  "documentation": "https://rare-disease-atlas.github.io/llms.txt",
+  "support": "https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp/issues",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "rare-disease",
+    "orphan-drug",
+    "computational-biology",
+    "public-health",
+    "biotech",
+    "myelofibrosis",
+    "jak2"
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "run_mcp.py",
+    "mcp_config": {
+      "command": "python3",
+      "args": ["${__dirname}/run_mcp.py"],
+      "env": {}
+    }
+  },
+  "tools": [
+    {
+      "name": "match_founder_opportunities",
+      "description": "Filter orphan disease startup and translational blueprints by founder background, capital tier, and wet-lab requirement."
+    },
+    {
+      "name": "get_disease_case_study",
+      "description": "Retrieve verified biology, trial readouts, open GEO/PDB datasets, and FDA orphan economics for a disease case study."
+    },
+    {
+      "name": "find_non_dilutive_grants",
+      "description": "List non-dilutive grants, SBIR/STTR mechanisms, and venture philanthropy tracks for orphan disease translation."
+    },
+    {
+      "name": "get_validation_communities",
+      "description": "Retrieve patient registries, institutional research networks, and anti-spam ethical validation guidelines."
+    }
+  ]
+}
