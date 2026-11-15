@@ -92,6 +92,10 @@ DISEASE_ID_ALIASES: dict[str, str] = {
     "jak2-v617f": "jak2-myelofibrosis",
     "pmf": "jak2-myelofibrosis",
     "mpn": "jak2-myelofibrosis",
+    "autoimmune-myelofibrosis": "autoimmune-myelofibrosis",
+    "aimf": "autoimmune-myelofibrosis",
+    "lupus-myelofibrosis": "autoimmune-myelofibrosis",
+    "sle-myelofibrosis": "autoimmune-myelofibrosis",
 }
 
 GRANT_TRACK_ALIASES: dict[str, str] = {

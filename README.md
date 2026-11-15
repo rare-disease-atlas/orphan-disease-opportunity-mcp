@@ -4,17 +4,31 @@
 [![Data License: CC BY 4.0](https://img.shields.io/badge/Data_License-CC_BY_4.0-emerald.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B%20(Zero%20Deps)-3776AB.svg)](./pyproject.toml)
 [![Live Atlas](https://img.shields.io/badge/Live_Atlas-rare--disease--atlas.github.io-4F46E5.svg)](https://rare-disease-atlas.github.io)
+[![Glama MCP Score](https://glama.ai/mcp/servers/rare-disease-atlas/orphan-disease-opportunity-mcp/badges/score.svg)](https://glama.ai/mcp/servers/rare-disease-atlas/orphan-disease-opportunity-mcp)
 
 **Open Venture & Translational Opportunity Atlas — Model Context Protocol (MCP) Server**  
-**Flagship Deep-Dive #1:** `JAK2 V617F` Myelofibrosis (`jak2-myelofibrosis`) • **Web Dossier:** <https://rare-disease-atlas.github.io>
+**Flagship #1:** Clonal `JAK2 V617F+` Myelofibrosis (`jak2-myelofibrosis`) • **Flagship #2:** Reversible Autoimmune Myelofibrosis & Iron/Hepcidin Axis (`autoimmune-myelofibrosis`) • **Web Dossier:** <https://rare-disease-atlas.github.io>
 
 `mcp-name: io.github.rare-disease-atlas/orphan-disease-opportunity-mcp`
 
-An open, **zero-third-party-dependency** Python MCP server and OpenAPI 3.1 toolkit designed for technical founders (**Computational / AI-Bio**, **Public Health Systems**, **Venture / Novel Financing**) and autonomous AI research agents evaluating high-tractability orphan disease startups, drug-repurposing wedges, non-dilutive SBIR/venture-philanthropy grants, and ethical clinical validation pathways.
+An open, **zero-third-party-dependency** Python STDIO + **zero-auth Remote Streamable HTTP** MCP server and OpenAPI 3.1 toolkit designed for technical founders (**Computational / AI-Bio**, **Public Health Systems**, **Venture / Novel Financing**) and autonomous AI research agents evaluating high-tractability orphan disease startups, drug-repurposing wedges, non-dilutive SBIR/venture-philanthropy grants, and ethical clinical validation pathways.
 
 ---
 
-## Instant 1-Command Installation (Zero PyPI Wait Required)
+## Option A: Zero-Install Remote Streamable HTTP MCP (Cloud & Hosted Agents)
+
+Connect immediately over HTTPS with **zero local installation and zero API keys**:
+
+- **Remote MCP Endpoint (`streamable-http`):** `https://api.rare-disease-atlas.workers.dev/mcp`
+- **A2A Peer Agent Card:** `https://rare-disease-atlas.github.io/.well-known/agent.json`
+
+```bash
+claude mcp add --transport http orphan-disease-opportunities https://api.rare-disease-atlas.workers.dev/mcp
+```
+
+---
+
+## Option B: Instant 1-Command Local STDIO Execution (`uvx`)
 
 Run directly from GitHub via [`uvx`](https://docs.astral.sh/uv/) with **zero external runtime dependencies** (pure Python >= 3.10 standard library):
 
