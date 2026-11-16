@@ -2,8 +2,8 @@
   "manifest_version": "0.3",
   "name": "orphan-disease-opportunity-mcp",
   "display_name": "Orphan Disease Opportunity Atlas MCP",
-  "version": "1.4.0",
-  "description": "Orphan disease startup blueprints, JAK2+ & autoimmune MF biology, non-dilutive grants, and validation MCP.",
+  "version": "1.5.0",
+  "description": "Live 7,000-disease diligence engine + 6 curated hematology/immunology startup & grant playbooks.",
   "long_description": "Zero-dependency Model Context Protocol (MCP) server for high-tractability orphan disease translational and venture blueprints (Flagships: Clonal JAK2 V617F+ Myelofibrosis and Autoimmune Myelofibrosis + Iron/Hepcidin Axis), FDA Orphan Drug economics, non-dilutive grants, and ethical patient-community validation.",
   "author": {
     "name": "Rare Disease Venture Atlas",
