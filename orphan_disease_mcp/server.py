@@ -32,13 +32,14 @@ import urllib.request
 from . import __version__
 
 SERVER_NAME = "orphan-disease-opportunity-mcp"
-DEFAULT_LIVE_URL = "https://rare-disease-atlas.github.io/opportunities.json"
+DEFAULT_LIVE_URL = "https://api.rare-disease-atlas.workers.dev/opportunities.json"
 SUPPORTED_PROTOCOL_VERSIONS = (
+    "2025-11-25",
     "2025-06-18",
     "2025-03-26",
     "2024-11-05",
 )
-DEFAULT_PROTOCOL_VERSION = "2025-03-26"
+DEFAULT_PROTOCOL_VERSION = "2025-11-25"
 
 BACKGROUND_ALIASES: dict[str, str] = {
     "computational-ai-bio": "computational-ai-bio",
