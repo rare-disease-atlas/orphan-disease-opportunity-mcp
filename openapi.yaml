@@ -1,14 +1,14 @@
 openapi: 3.1.0
 info:
-  title: Orphan Disease Venture & Translational Opportunity API (Static S3 Feed)
-  version: 1.0.0
-  summary: Zero-auth static JSON & Markdown endpoints for AI agents, Custom GPT Actions, and OpenAPI tool callers.
+  title: Orphan Disease Venture & Translational Opportunity API (Static & Edge Read-Only Feed)
+  version: 1.6.0
+  summary: Zero-auth read-only JSON & Markdown endpoints for AI agents, Custom GPT Actions, and OpenAPI tool callers.
   description: >
     Machine-readable startup blueprints, biological tractability, FDA Orphan Drug Act unit economics,
-    non-dilutive SBIR/venture-philanthropy grants, and ethical clinical validation pathways.
-    Flagship Deep-Dive #1 covers JAK2 V617F-positive Myelofibrosis (`jak2-myelofibrosis`).
-    Hosted statically on S3/CloudFront with zero authentication required so Custom GPTs and OpenAPI
-    agents can query live structured data directly.
+    non-dilutive SBIR/venture-philanthropy grants, 30/60/90-day diligence roadmaps, and ethical clinical validation pathways.
+    Anchored on Paired Flagships Clonal JAK2 V617F+ Primary Myelofibrosis (`jak2-myelofibrosis`) and
+    Reversible Autoimmune Myelofibrosis (`autoimmune-myelofibrosis`), plus 4 adjacent hematology-immunology cohorts.
+    Hosted statically with zero authentication required so Custom GPTs and OpenAPI agents can query live structured data directly.
   contact:
     name: Rare Disease Venture Atlas
     url: https://rare-disease-atlas.github.io

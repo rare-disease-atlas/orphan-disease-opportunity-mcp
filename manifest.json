@@ -2,9 +2,9 @@
   "manifest_version": "0.3",
   "name": "orphan-disease-opportunity-mcp",
   "display_name": "Orphan Disease Opportunity Atlas MCP",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Myelofibrosis (JAK2+ & Autoimmune MF) flagship playbooks + live 7,000-orphan-disease diligence MCP.",
-  "long_description": "Zero-dependency Model Context Protocol (MCP) server for high-tractability orphan disease translational and venture blueprints (Flagships: Clonal JAK2 V617F+ Myelofibrosis and Autoimmune Myelofibrosis + Iron/Hepcidin Axis), FDA Orphan Drug economics, non-dilutive grants, and ethical patient-community validation.",
+  "long_description": "Zero-dependency, read-only Model Context Protocol (MCP 2026-07-28 & 2025-11-25) server for high-tractability orphan disease translational and venture blueprints (Flagships: Clonal JAK2 V617F+ Primary Myelofibrosis and Reversible Autoimmune Myelofibrosis + Iron/Hepcidin Axis), 30/60/90-day diligence roadmaps, FDA Orphan Drug economics, non-dilutive grants, and ethical patient-community guardrails.",
   "author": {
     "name": "Rare Disease Venture Atlas",
     "url": "https://rare-disease-atlas.github.io"
@@ -39,29 +39,35 @@
     "mcp_config": {
       "command": "python3",
       "args": ["${__dirname}/run_mcp.py"],
-      "env": {}
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
     }
   },
   "tools": [
     {
-      "name": "match_founder_opportunities",
-      "description": "Filter orphan disease startup and translational blueprints by founder background, capital tier, and wet-lab requirement."
+      "name": "search_founder_opportunities",
+      "description": "Search startup blueprints anchored on Clonal JAK2+ & Autoimmune Myelofibrosis (plus 4 adjacent cohorts) by track, capital, and wet-lab need."
     },
     {
       "name": "get_disease_case_study",
-      "description": "Retrieve verified biology, trial readouts, open GEO/PDB datasets, and FDA orphan economics for a disease case study."
+      "description": "Retrieve curated biology, NCT trials, GEO/PDB datasets, and failure modes (Flagships: 'jak2-myelofibrosis' and 'autoimmune-myelofibrosis')."
     },
     {
-      "name": "find_non_dilutive_grants",
-      "description": "List non-dilutive grants, SBIR/STTR mechanisms, and venture philanthropy tracks for orphan disease translation."
+      "name": "list_non_dilutive_grants",
+      "description": "List NIH/NCI SBIR, MPNRF, LLS TAP, CDCN, ARPA-H, and FDA Orphan grants for Myelofibrosis and rare disease ventures."
     },
     {
       "name": "get_validation_communities",
-      "description": "Retrieve patient registries, institutional research networks, and anti-spam ethical validation guidelines."
+      "description": "Retrieve registries, biobanks, patient foundations, and non-extractive research guardrails for Myelofibrosis and rare diseases."
     },
     {
-      "name": "submit_atlas_feedback",
-      "description": "Submit opt-in non-PII feedback, missing founder wedges, or ClinicalTrials.gov citation errata."
+      "name": "get_90_day_validation_plan",
+      "description": "Retrieve a structured 30/60/90-day diligence roadmap contrasting Clonal JAK2+ vs Autoimmune Myelofibrosis (plus 4 adjacent cohorts)."
+    },
+    {
+      "name": "search_any_orphan_indication",
+      "description": "Search live OpenTargets, ClinicalTrials.gov v2, and PubMed evidence for any rare disease, benchmarked against JAK2+ & Autoimmune Myelofibrosis."
     }
   ]
 }

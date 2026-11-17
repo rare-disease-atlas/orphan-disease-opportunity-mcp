@@ -1,0 +1,115 @@
+name: Release MCPB Bundle with SLSA Provenance
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v1.6.0) when triggered manually"
+        required: false
+        default: "v1.6.0"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release-mcpb:
+    name: Build, Test, Attest & Release .mcpb Bundle
+    runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run full MCP v1.6.0 verification suite
+        run: PYTHONDONTWRITEBYTECODE=1 python3 test_mcp.py
+
+      - name: Build deterministic orphan-disease-opportunity-mcp.mcpb bundle
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          import zipfile
+
+          root = Path(".")
+          files = [
+              "manifest.json",
+              "run_mcp.py",
+              "pyproject.toml",
+              "LICENSE",
+              "SECURITY.md",
+              "README.md",
+              "orphan_disease_mcp/__init__.py",
+              "orphan_disease_mcp/__main__.py",
+              "orphan_disease_mcp/server.py",
+              "data/opportunities.json",
+          ]
+          out_path = root / "orphan-disease-opportunity-mcp.mcpb"
+          fixed_dt = (2026, 1, 1, 0, 0, 0)
+
+          with zipfile.ZipFile(out_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+              for rel in files:
+                  src = root / rel
+                  assert src.is_file(), f"Missing required bundle file: {rel}"
+                  assert "__pycache__" not in rel and not rel.endswith(".pyc")
+                  zi = zipfile.ZipInfo(filename=rel, date_time=fixed_dt)
+                  zi.compress_type = zipfile.ZIP_DEFLATED
+                  zi.create_system = 3
+                  mode = 0o755 if rel == "run_mcp.py" else 0o644
+                  zi.external_attr = (mode & 0xFFFF) << 16
+                  zf.writestr(zi, src.read_bytes(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+
+          with zipfile.ZipFile(out_path, "r") as check_zf:
+              names = check_zf.namelist()
+              assert not any("__pycache__" in n or n.endswith(".pyc") for n in names), names
+
+          digest = hashlib.sha256(out_path.read_bytes()).hexdigest()
+          print(f"Built {out_path} ({out_path.stat().st_size} bytes) sha256={digest}")
+          PY
+
+      - name: Smoke-test extracted .mcpb bundle via run_mcp.py
+        run: |
+          mkdir -p /tmp/mcpb-smoke
+          unzip -q orphan-disease-opportunity-mcp.mcpb -d /tmp/mcpb-smoke
+          ATLAS_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 python3 - <<'PY'
+          import json, subprocess
+          p = subprocess.Popen(
+              ["python3", "/tmp/mcpb-smoke/run_mcp.py"],
+              stdin=subprocess.PIPE,
+              stdout=subprocess.PIPE,
+              text=True,
+          )
+          p.stdin.write(json.dumps({"jsonrpc": "2.0", "id": 1, "method": "server/discover", "params": {}}) + "\n")
+          p.stdin.flush()
+          resp = json.loads(p.stdout.readline())
+          assert resp["result"]["protocolVersion"] == "2026-07-28", resp
+          assert len(resp["result"]["tools"]) == 6, resp
+          p.stdin.close()
+          p.wait(timeout=5)
+          print("Smoke-test passed: MCP 2026-07-28 server/discover OK")
+          PY
+
+      - name: Attest SLSA build provenance for orphan-disease-opportunity-mcp.mcpb
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: orphan-disease-opportunity-mcp.mcpb
+
+      - name: Publish attested .mcpb bundle to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REL_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+        run: |
+          gh release create "${REL_TAG}" orphan-disease-opportunity-mcp.mcpb \
+            --title "Orphan Disease Opportunity Atlas MCP ${REL_TAG}" \
+            --notes "Myelofibrosis (JAK2 V617F+ & Autoimmune MF) flagship playbooks + live 7,000-orphan-disease diligence MCP (${REL_TAG}) with cryptographic SLSA build provenance." \
+            || gh release upload "${REL_TAG}" orphan-disease-opportunity-mcp.mcpb --clobber

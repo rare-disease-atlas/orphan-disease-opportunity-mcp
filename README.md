@@ -1,17 +1,18 @@
-# `orphan-disease-opportunity-mcp`
+# `orphan-disease-opportunity-mcp` (`v1.6.0`)
 
 [![License: MIT](https://img.shields.io/badge/Code_License-MIT-blue.svg)](./LICENSE)
 [![Data License: CC BY 4.0](https://img.shields.io/badge/Data_License-CC_BY_4.0-emerald.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B%20(Zero%20Deps)-3776AB.svg)](./pyproject.toml)
+[![MCP 2026-07-28](https://img.shields.io/badge/MCP_Protocol-2026--07--28_%7C_2025--11--25-0F766E.svg)](https://registry.modelcontextprotocol.io)
+[![SLSA Provenance](https://img.shields.io/badge/SLSA_Provenance-Attested-16A34A.svg)](https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp/attestations)
 [![Live Atlas](https://img.shields.io/badge/Live_Atlas-rare--disease--atlas.github.io-4F46E5.svg)](https://rare-disease-atlas.github.io)
-[![Glama MCP Score](https://glama.ai/mcp/servers/rare-disease-atlas/orphan-disease-opportunity-mcp/badges/score.svg)](https://glama.ai/mcp/servers/rare-disease-atlas/orphan-disease-opportunity-mcp)
 
-**Open Venture & Translational Opportunity Atlas — Model Context Protocol (MCP) Server**  
-**Flagship #1:** Clonal `JAK2 V617F+` Myelofibrosis (`jak2-myelofibrosis`) • **Flagship #2:** Reversible Autoimmune Myelofibrosis & Iron/Hepcidin Axis (`autoimmune-myelofibrosis`) • **Web Dossier:** <https://rare-disease-atlas.github.io>
+**Open Venture & Translational Opportunity Atlas — Read-Only Model Context Protocol (`MCP 2026-07-28`) Server**  
+**Flagship #1:** Clonal `JAK2 V617F+` Primary Myelofibrosis (`jak2-myelofibrosis`) • **Flagship #2:** Reversible Autoimmune Myelofibrosis & Iron/Hepcidin Axis (`autoimmune-myelofibrosis`) • **Web Dossier:** <https://rare-disease-atlas.github.io>
 
 `mcp-name: io.github.rare-disease-atlas/orphan-disease-opportunity-mcp`
 
-An open, **zero-third-party-dependency** Python STDIO + **zero-auth Remote Streamable HTTP** MCP server and OpenAPI 3.1 toolkit designed for technical founders (**Computational / AI-Bio**, **Public Health Systems**, **Venture / Novel Financing**) and autonomous AI research agents evaluating high-tractability orphan disease startups, drug-repurposing wedges, non-dilutive SBIR/venture-philanthropy grants, and ethical clinical validation pathways.
+An open, **zero-third-party-dependency**, **100% read-only** Python STDIO + **zero-auth Remote Streamable HTTP** MCP server (`2026-07-28` `server/discover` + `2025-11-25` `initialize` + MCP Apps `ui://rare-disease-atlas/venture-card`) and OpenAPI 3.1 toolkit designed for technical founders (**Computational / AI-Bio**, **Public Health Systems**, **Venture / Novel Financing**) and autonomous AI research agents evaluating high-tractability orphan disease startups, drug-repurposing wedges, 30/60/90-day diligence roadmaps, non-dilutive SBIR/venture-philanthropy grants, and ethical clinical validation guardrails.
 
 ---
 
@@ -28,7 +29,7 @@ claude mcp add --transport http orphan-disease-opportunities https://api.rare-di
 
 ---
 
-## Option B: Instant 1-Command Local STDIO Execution (`uvx`)
+## Option B: Instant 1-Command Local STDIO Execution (`uvx` or Attested `.mcpb`)
 
 Run directly from GitHub via [`uvx`](https://docs.astral.sh/uv/) with **zero external runtime dependencies** (pure Python >= 3.10 standard library):
 
@@ -36,7 +37,11 @@ Run directly from GitHub via [`uvx`](https://docs.astral.sh/uv/) with **zero ext
 uvx --from git+https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp orphan-disease-opportunity-mcp
 ```
 
-*(Once published to PyPI, `uvx orphan-disease-opportunity-mcp` also runs identically.)*
+Or download the cryptographically attested `orphan-disease-opportunity-mcp.mcpb` desktop bundle from [GitHub Releases](https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp/releases) and verify its SLSA build provenance:
+
+```bash
+gh attestation verify orphan-disease-opportunity-mcp.mcpb --repo rare-disease-atlas/orphan-disease-opportunity-mcp
+```
 
 ### Add to Claude Code (1 Command)
 
@@ -45,8 +50,6 @@ claude mcp add orphan-disease-opportunities -- uvx --from git+https://github.com
 ```
 
 ### Add to Claude Desktop / Cursor / Windsurf / Cline / Antigravity
-
-Add to `claude_desktop_config.json`, `.cursor/mcp.json`, or your MCP client settings:
 
 ```json
 {
@@ -65,78 +68,50 @@ Add to `claude_desktop_config.json`, `.cursor/mcp.json`, or your MCP client sett
 
 ---
 
-## Why This Exists
+## Paired Myelofibrosis Flagships (`jak2-myelofibrosis` & `autoimmune-myelofibrosis`)
 
-Over 7,000 rare diseases carry **FDA Orphan Drug Act** structural advantages (7-year US market exclusivity, 100% waiver of the **$4,682,003 FY2026 PDUFA filing fee**, 25% qualified clinical trial tax credit, and N=120–350 pivotal trials), yet technical builders outside traditional wet-lab pharma rarely see where **single-mutation structural tractability** intersects **urgent standard-of-care failure**.
+Over 7,000 rare diseases carry **FDA Orphan Drug Act** structural advantages (7-year US market exclusivity, 100% waiver of the **$4,682,003 FY2026 PDUFA filing fee**, 25% qualified clinical trial tax credit, and N=120–350 pivotal trials). Our Atlas anchors every tool on a paired positive/negative translational control in human bone marrow fibrosis:
 
-**Flagship Case Study #1 (`jak2-myelofibrosis`)** models this end-to-end:
-- **Causal Precision:** A single somatic mutation (`JAK2 V617F` in the **JH2 pseudokinase** autoinhibitory domain) drives ~50–60% of Primary Myelofibrosis (`ORPHA:824`, ~15,000–25,000 US patients).
-- **First-Gen SoC Failure Cliff:** All 4 FDA-approved JAK inhibitors (*ruxolitinib, fedratinib, pacritinib, momelotinib*) are Type I ATP-competitive binders of the conserved **JH1 catalytic domain**, inhibiting wild-type JAK2 alongside V617F—causing dose-limiting anemia/thrombocytopenia, ~50% discontinuation within 3 years, minimal clonal eradication, and **11–23 month median survival post-ruxolitinib failure**.
-- **Zero-Wet-Lab & Low-Capital Wedges:** Structure-guided JH2 V617F vs WT (`PDB: 4FVR/6E2Q/8BAK/8EX2` vs `4FVP`) allosteric/PROTAC design + outsourced CRO screening; AI marrow fibrosis digital pathology (`MF-0..3` composite endpoints solving the Phase 3 SVR35/TSS50 crisis); single-cell megakaryocyte-stroma drug repurposing (`GSE144568`, `GSE156644`); no-washout RWE clinical trial matching; allo-HSCT timing CDS; and evergreen venture-philanthropy SPVs.
+1. **Flagship #1 — Clonal `JAK2 V617F+` Primary Myelofibrosis (`jak2-myelofibrosis`):**
+   - Single somatic `JAK2 V617F` mutation in the **JH2 pseudokinase** domain drives ~50–60% of Primary Myelofibrosis (`ORPHA:824`, ~15,000–25,000 US patients).
+   - All 4 approved Type I `JH1` JAK inhibitors (*ruxolitinib, fedratinib, pacritinib, momelotinib*) inhibit wild-type JAK2 alongside V617F—causing cytopenias, <15% marrow fibrosis reversal, and **11–23 month median survival post-ruxolitinib failure**.
+   - High-conviction wedges: mutant-selective `JH2` allosteric/PROTAC design (`PDB: 6E2Q/8BAK` vs `4FVP`), Type II persistence breakers, mutant `CALR` biologics, spatial marrow pathology surrogates, and no-washout RWE trial matching.
+2. **Flagship #2 — Reversible Autoimmune Myelofibrosis (`autoimmune-myelofibrosis`, *Nature's Positive Control*):**
+   - `JAK2/CALR/MPL`-negative lupus/SLE-spectrum marrow fibrosis with dual transfusional + `IL-6 -> hepcidin -> ferroportin` iron block where human `MF-2/MF-3` reticulin fibrosis **physically resolves in 74–80% of patients** on targeted immunomodulation (*Gangat et al., Mayo Clinic 2024*).
 
 ---
 
-## Exposed MCP Capabilities
+## Exposed Read-Only MCP Capabilities (`v1.6.0`)
 
-### Tools (`tools/list` & `tools/call`)
+Supports **MCP `2026-07-28` (`server/discover`)** and **`2025-11-25` (`initialize`)**, structured `outputSchema` + `structuredContent`, input `examples`, and MCP Apps UI (`ui://rare-disease-atlas/venture-card`).
+
+### Canonical Read-Only Tools (`tools/list` & `tools/call`)
 | Tool | Parameters | Capability |
 | :--- | :--- | :--- |
-| **`match_founder_opportunities`** | `background` (`computational-ai-bio`, `public-health`, `venture-novel-financing`, `all`), `capital_tier` (`bootstrapped-grant`, `seed`, `series-a-platform`, `all`), `wet_lab_required` (`true`/`false`), `disease_id` | Filters startup & translational blueprints with unit economics, regulatory pathways, open datasets, and 90-day milestones. Syncs live from `https://rare-disease-atlas.github.io/opportunities.json` with automatic fallback to bundled `opportunities.json`. |
-| **`get_disease_case_study`** | `disease_id` (default `"jak2-myelofibrosis"`) | Returns causal JH2 vs JH1 biology, Type I JAKi failure modes, FDA Orphan Drug economics, $1.7B–$2.9B M&A comps, and open `PDB`/`GEO`/`ChEMBL`/`ClinicalTrials.gov` accessions. |
-| **`find_non_dilutive_grants`** | `track` (`all`, `sbir-sttr`, `foundation`, `venture-philanthropy`, `regulatory-orphan`, `federal-translational`) | Maps NCI/NHLBI SBIR, MPN Research Foundation (`MPN Challenge`), Blood Cancer United (`TAP`), Harrington Discovery Institute, FDA OOPD, and ARPA-H awards. |
-| **`get_validation_communities`** | `disease_id` (default `"jak2-myelofibrosis"`) | Maps institutional registries (`MPN PROGRESSion Registry NCT07362225`, `HealthTree`, `Blood Cancer United CTSC`, `MPN Voice`) paired with strict **non-extractive ethical patient engagement rules**. |
+| **`search_founder_opportunities`** *(alias: `match_founder_opportunities`)* | `background`, `capital_tier`, `wet_lab_required`, `disease_id` | Searches startup blueprints anchored on Clonal `JAK2+` & Autoimmune Myelofibrosis (plus 4 adjacent cohorts) by founder track, capital tier, and wet-lab requirement. |
+| **`get_disease_case_study`** | `disease_id` (default `"jak2-myelofibrosis"`) | Retrieves curated biology, NCT trials, `GEO`/`PDB` datasets, failure modes, and FDA Orphan Drug unit economics (`jak2-myelofibrosis`, `autoimmune-myelofibrosis`, `vexas-syndrome`, `castleman-disease`, `systemic-mastocytosis`, `telomere-biology-disorders`). |
+| **`list_non_dilutive_grants`** *(alias: `find_non_dilutive_grants`)* | `track` (`all`, `sbir-sttr`, `foundation`, `venture-philanthropy`, `regulatory-orphan`, `federal-translational`) | Lists NIH/NCI SBIR, MPNRF, LLS TAP, CDCN, ARPA-H, and FDA Orphan grants for Myelofibrosis and rare disease ventures. |
+| **`get_validation_communities`** | `disease_id` (default `"jak2-myelofibrosis"`) | Retrieves registries, biobanks, patient foundations, and non-extractive research guardrails for Myelofibrosis and rare diseases. |
+| **`get_90_day_validation_plan`** *(alias: `generate_90_day_validation_plan`)* | `disease_id`, `background`, `capital_tier` | Retrieves a structured 30/60/90-day diligence roadmap contrasting Clonal `JAK2+` vs Autoimmune Myelofibrosis (plus 4 adjacent cohorts). |
+| **`search_any_orphan_indication`** *(alias: `analyze_any_orphan_indication`)* | `disease_query`, `founder_background` | Searches live OpenTargets, ClinicalTrials.gov v2, and PubMed evidence for any of 7,000+ rare diseases, benchmarked against `JAK2+` & Autoimmune Myelofibrosis. |
 
-### Resource (`resources/read`)
-- **`briefing://rare-disease-playbook/jak2-myelofibrosis`** — Complete Markdown venture & translational playbook.
+### Resources (`resources/list` & `resources/read`)
+- `briefing://rare-disease-playbook/jak2-myelofibrosis` — Clonal `JAK2 V617F+` Myelofibrosis playbook (`text/markdown`)
+- `briefing://rare-disease-playbook/autoimmune-myelofibrosis` — Reversible Autoimmune Myelofibrosis & iron triage playbook (`text/markdown`)
+- `briefing://rare-disease-playbook/hematology-immunology-expansion` — VEXAS, Castleman, Mastocytosis & Telomere cohorts (`text/markdown`)
+- `briefing://rare-disease-playbook/non-dilutive-grants` — Non-dilutive SBIR/ARPA-H/MPNRF/LLS TAP grant stack (`text/markdown`)
+- `briefing://rare-disease-playbook/validation-ethics` — Registries, biobanks & ethical discovery guardrails (`text/markdown`)
+- `ui://rare-disease-atlas/venture-card` — Interactive MCP App HTML card (`text/html;profile=mcp-app`)
 
 ### Prompt (`prompts/get`)
-- **`evaluate-rare-disease-venture`** — Multi-step 90-day killer-experiment, non-dilutive grant-stacking, and ethical validation workflow (`founder_background`, `capital_budget`, `wet_lab_access`).
-
----
-
-## Alternative Deployment Modes
-
-### Docker (Hardened Non-Root Container)
-
-```bash
-docker build -t orphan-disease-opportunity-mcp .
-
-# Stdio MCP transport
-docker run -i --rm orphan-disease-opportunity-mcp
-
-# Remote Streamable HTTP MCP server (exposes POST /mcp, GET /.well-known/mcp.json, GET /health)
-docker run --rm -p 8080:8080 orphan-disease-opportunity-mcp --transport http --host 0.0.0.0 --port 8080
-```
-
-### Local Source Execution
-
-```bash
-git clone https://github.com/rare-disease-atlas/orphan-disease-opportunity-mcp.git
-cd orphan-disease-opportunity-mcp
-python3 -m orphan_disease_mcp
-```
-
-### Custom GPT Actions & OpenAPI 3.1 Agents
-
-Import [`openapi.yaml`](./openapi.yaml) directly into **OpenAI Custom GPT Actions**, LangChain `OpenAPIToolkit`, or any OpenAPI 3.1 client to query `https://rare-disease-atlas.github.io/opportunities.json` over HTTPS with zero backend infrastructure.
-
----
-
-## Environment Variables (Optional)
-
-| Variable | Default | Description |
-| :--- | :--- | :--- |
-| `ATLAS_DATA_URL` | `https://rare-disease-atlas.github.io/opportunities.json` | Override URL for live JSON dataset sync. |
-| `ATLAS_OFFLINE` | unset (`0`) | Set to `1` (`true`) to force deterministic offline execution from bundled `opportunities.json`. |
+- **`evaluate-rare-disease-venture`** — Read-only 90-day diligence workflow (`founder_background`, `capital_budget`, `wet_lab_access`).
 
 ---
 
 ## Verification & Quality Assurance
 
-Run the full zero-dependency end-to-end test suite (covers `stdio` JSON-RPC 2.0 lifecycle, all 4 tools, live HTTP mock sync + offline fallback, Streamable HTTP transport, and `server.json` / `glama.json` / `smithery.yaml` / `openapi.yaml` schema checks):
-
 ```bash
-python3 test_mcp.py
+PYTHONDONTWRITEBYTECODE=1 python3 test_mcp.py
 ```
 
 ## License
